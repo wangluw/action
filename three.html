@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=750, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="js/three.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .box {
+      border: 1px solid #000;
+      margin-top: 200px;
+      width: 100%;
+      height: 500px;
+      background: #aaa;
+    }
+    .content {
+      display: block;
+      margin: 0 auto;
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <div class="content"></div>
+  </div>
+  <script>
+    var box = document.querySelector('.box')
+    var con = document.querySelector('.content')
+    con.style.width =  box.clientWidth / 2 + 'px'
+    con.style.height =  box.clientHeight + 'px'
+    // 场景
+    var scence
+    function scenceF(params) {
+      scence = new THREE.Scene()
+      // 光
+      // 环境光
+      // var light = new THREE.AmbientLight('#ffff00')
+      // light.position.set(100, 100, 200)
+      // 点光
+      // var light = new THREE.PointLight('#ffff00', 1, 0)
+      // light.position.set(100, 100, 200)
+      // 聚光
+      // var light = new THREE.SpotLight('#ffff00', 1, 0, 30 * Math.PI / 180, 100)  // ?
+      // light.position.set(100, 100, 200)
+      // 平行光
+      var light = new THREE.DirectionalLight('#ffff00', 1)
+      light.position.set(100, 0, 200)
+      scence.add(light)
+    }
+    // 相机
+    var camera
+    function cameraF(params) {
+      // 透视相机
+      camera = new THREE.PerspectiveCamera(45, box.clientWidth / 2 / box.clientHeight, 100, 1000)
+      // 正交相机
+      // camera = new THREE.OrthographicCamera(-(box.clientWidth / 4), box.clientWidth / 4, box.clientHeight / 2, -(box.clientHeight / 2), 10, 400)
+      camera.position.z = 2000
+    }
+    // 渲染
+    var renderer
+    function rendererF(params) {
+      renderer = new THREE.WebGLRenderer()
+      renderer.setSize(box.clientWidth / 2, box.clientHeight)
+      con.appendChild(renderer.domElement)
+    }
+    // 实物
+    // var cube, geometry, material
+    var line5
+    function physical(params) {
+      // 长方体
+      
+      // 样式
+      // material = new THREE.MeshBasicMaterial({
+      //   color: '#f00'
+      // })
+      geometry = new THREE.CubeGeometry(30, 30, 30)
+      material = new THREE.MeshLambertMaterial({color: '#fff'})
+      // 实物
+      cube1 = new THREE.Mesh(geometry, material)
+      cube1.rotation.y = 10
+      cube1.rotation.x = 10
+      scence.add(cube1)
+
+      // 实物
+      cube2 = new THREE.Mesh(geometry, material)
+      cube2.position.set(70, 0, 0)
+      cube2.rotation.y = 10
+      cube2.rotation.x = 10
+      scence.add(cube2)
+
+      // 点
+      var geometry1 = new THREE.Geometry()
+      var material1 = new THREE.LineBasicMaterial({vertexColors: true})
+      var color1 = new THREE.Color('#ff0')
+      var color2 = new THREE.Color('#f00')
+
+      var point1 = new THREE.Vector3(-200, -200, 0)
+      var point2 = new THREE.Vector3(200, 200, 0)
+      geometry1.vertices.push(point1)
+      geometry1.vertices.push(point2)
+      geometry1.colors.push(color1, color2)
+      var line1 = new THREE.LineSegments(geometry1, material1, THREE.LinePieces)
+      scence.add(line1)
+
+      var geometry2 = new THREE.Geometry()
+      var point3 = new THREE.Vector3(0, -500, -500)
+      var point4 = new THREE.Vector3(0, 500, 500)
+      geometry2.vertices.push(point3)
+      geometry2.vertices.push(point4)
+      geometry2.colors.push(color1, color2)
+      var line2 = new THREE.LineSegments(geometry2, material1, THREE.LinePieces)
+      scence.add(line2)
+
+      var geometry3 = new THREE.Geometry()
+      var point5 = new THREE.Vector3(-500, 0, -500)
+      var point6 = new THREE.Vector3(500, 0, 500)
+      geometry3.vertices.push(point5)
+      geometry3.vertices.push(point6)
+      geometry3.colors.push(color1, color2)
+      var line3 = new THREE.LineSegments(geometry3, material1, THREE.LinePieces)
+      scence.add(line3)
+
+      // var geometry4 = new THREE.Geometry()
+      // var point7 = new THREE.Vector3(0, 200, 0)
+      // var point8 = new THREE.Vector3(0, -200, 0)
+      // geometry4.vertices.push(point7)
+      // geometry4.vertices.push(point8)
+      // for (var i = 0; i <= 20; i++) {
+      //   var line4 = new THREE.LineSegments(geometry4, new THREE.LineBasicMaterial({color: '#fff'}))
+      //   line4.position.x = i * 20 - 200
+      //   scence.add(line4)
+
+      //   line5 = new THREE.LineSegments(geometry4, new THREE.LineBasicMaterial({color: '#fff'}))
+      //   line5.position.y = i * 20 - 200
+      //   line5.rotation.z = -90 * Math.PI / 180
+      //   scence.add(line5)
+      // }
+      camera.position.z = 200
+    }
+    function render(params) {
+      // requestAnimationFrame(render)
+      
+      renderer.render(scence, camera)
+    }
+    function init(params) {
+      scenceF()
+      cameraF()
+      rendererF()
+      physical()
+      render()
+    }
+    init()
+  </script>
+</body>
+
+</html>

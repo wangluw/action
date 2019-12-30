@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=750, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .box {
+      border: 1px solid #000;
+      margin-top: 200px;
+      width: 100%;
+      height: 500px;
+      background: #aaa;
+    }
+    #can {
+      display: block;
+      margin: 0 auto;
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <canvas id="can">
+
+    </canvas>
+    <span style="font-size: 20px">大三大四的城市的</span>
+  </div>
+  <script>
+    var box = document.querySelector('.box')
+    var can = document.getElementById('can')
+    var pointArr = []
+    can.setAttribute('width', box.clientWidth / 2)
+    can.setAttribute('height', box.clientHeight)
+    var cxt = can.getContext('2d')
+    setInterval(() => {
+      pointArr.push({
+        speed: Math.floor(Math.random() * 3) + 1,
+        left: box.clientWidth / 4,
+        width: Math.floor(Math.random() * 5) + 3,
+        top: box.clientHeight / 2,
+        k: Math.random() > 0.5 ? (Math.random() * 8 + 1) / 3 : 0 - (Math.random() * 8 + 1) / 3,
+        dir: Math.random() > 0.5 ? true : false,
+        color: `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`
+      })
+    }, 1000)
+    setInterval(() => {
+      dos(cxt)
+    }, 100)
+    function dos(cxt) {
+      cxt.clearRect(0, 0, box.clientWidth / 2, box.clientHeight)
+      pointArr.forEach((item, i) => {
+        const { left, top } = item
+        if (item.dir) {
+          item.left += item.speed
+        } else {
+          item.left -= item.speed
+        }
+        item.top = item.k * (item.left - left) + top
+        cxt.fillStyle= item.color
+        cxt.beginPath()
+        cxt.arc(item.left, item.top, item.width, 0, Math.PI * 2)
+        cxt.fill()
+        pointArr[i] = {
+          speed: item.speed,
+          width: item.width,
+          color: item.color,
+          left: item.left,
+          top: item.top,
+          k: (item.left >= (box.clientWidth - item.width) / 2) || (item.left <= item.width) || (item.top >= (box.clientHeight - item.width)) || (item.top <= item.width) ? item.k < 0 ? Math.abs(item.k) : 0 - item.k : item.k,
+          dir: (item.left >= (box.clientWidth - item.width) / 2) || (item.left <= item.width) ? !item.dir : item.dir
+        }
+      })
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    html, body{
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <!-- <div class="box" style="width: 100%;height: 100%;background: #aaa;position:relative;">
+    <div class="content" style="width: 50%;height:50%;position: absolute;left: 0; top: 0;bottom: 0;right:0;margin: auto;background: blue">
+
+    </div>
+  </div> -->
+  <h2>圆</h2>
+  <svg style="border: 1px solid purple" xmlns="http://www.w3.org/2000/svg" width="100" height="100" version="1.1">
+    <circle
+      cx="50"
+      cy="50"
+      r="50"
+      stroke="black"
+      stroke-width="0"
+      fill="red"
+    >
+
+    </circle>
+  </svg>
+  <h2>矩形</h2>
+  <svg style="border: 1px solid purple" xmlns="http://www.w3.org/2000/svg" width="100" height="100" version="1.1">
+    <rect
+      x="10"
+      y="10"
+      rx="100"
+      ry="20"
+      width="50"
+      height="50"
+      style="fill:rgb(0,0,255); stroke-width: 1;stroke: rgb(0, 0,0); fill-opacity: 0.5;stroke-opacity: 0.3;opacity: 0.9;"
+    >
+
+    </rect>
+  </svg>
+  <h2>椭圆</h2>
+  <svg style="border: 1px solid purple" xmlns="http://www.w3.org/2000/svg" width="100" height="100" version="1.1">
+    <ellipse
+      cx="50"
+      cy="50"
+      rx="50"
+      ry="25"
+      style="fill: red;"
+    >
+
+    </ellipse>
+  </svg>
+  <h2>线</h2>
+  <svg style="border: 1px solid purple" xmlns="http://www.w3.org/2000/svg" width="100" height="100" version="1.1">
+    <line
+      x1="50"
+      y1="0"
+      x2="50"
+      y2="100"
+      style="stroke: green;stroke-width: 2;"
+    >
+
+    </line>
+  </svg>
+  <h2>多边形</h2>
+  <svg style="border: 1px solid purple" xmlns="http://www.w3.org/2000/svg" width="100" height="100" version="1.1">
+    <polygon
+      points="50,0 0,100 100,100"
+      style="fill:green;stroke-width:3;stroke:black;fill-rule:nonzero"
+    >
+    </polygon>
+  </svg>
+  <h2>曲线</h2>
+  <svg style="border: 1px solid purple" xmlns="http://www.w3.org/2000/svg" width="100" height="100" version="1.1">
+    <polyline
+      points="50,0 0,100 100,100"
+      style="fill: none;stroke: black;stroke-width:3"
+    >
+    </polygon>
+  </svg>
+  <script>
+    // var arr = [1,2,3,4]
+    // forDo(arr, '')
+    // function forDo(array, nowIndex) {
+    //   console.log(array, nowIndex)
+    //   let nowIndexx = nowIndex
+    //   array.forEach((item, index) => {
+    //     if (nowIndexx.length < array.length) {
+    //       forDo(array, `${nowIndexx}${item}`)
+    //     } else {
+    //       console.log(`${nowIndexx}${item}`)
+    //     }
+    //   })
+    // }
+    // console.log(add(62))
+    // function add(n) {
+    //   return (1 + n) * n / 2
+    // }
+    // console.log(document.querySelector('.box'))
+    // document.querySelector('.box').addEventListener('click', (e) => {
+    //   console.log('box')
+    //   e.stopPropagation()
+    // }, true)
+    // document.querySelector('.content').addEventListener('click', (e) => {
+    //   console.log('content')
+    //   // e.stopPropagation()
+    // }, true)
+    // document.querySelector('.box').onclick = () => {
+    //   console.log('box')
+    // }
+    // document.querySelector('.content').onclick = () => {
+    //   console.log('content')
+    // }
+    // var arr = []
+    // var target = []
+    // var target1 = []
+    // for (var i = 0; i< 100000; i++) {
+    //   arr.push(i)
+    // }
+    // var date = new Date().getTime()
+    // for (var j = 1; j< 50000; j++) {
+    //   let tar = null
+    //   do {
+    //     tar = arr[Math.random() * arr.length >> 0]
+    //   }
+    //   while(target.includes(tar))
+    //   target.push(tar)
+    // }
+    // console.log(new Date().getTime() - date)
+    // var date1 = new Date().getTime()
+    // var ik = arr.length
+    // for (var j = arr.length; j > 0; j--) {
+    //   var suiji = Math.random() * ik >> 0
+    //   var middle
+    //   middle = arr[suiji]
+    //   arr[suiji] = arr[ik - 1]
+    //   arr[ik - 1] = middle
+    //   ik--
+    // }
+    // target1.push(...arr.splice(0, 50000))
+    // console.log(new Date().getTime() - date1)
+    // b(123)
+    // function b(params) {
+    //   debugger
+    //   var ccc =1
+    //   a()
+    // }
+    // function a(params) {
+    //   debugger
+    //   console.log(123)
+    //   var abc =1
+    //   console.log(a)
+    // }
+    // class NewObj {
+    //   constructor() {
+    //     this.name = 'jack'
+    //     this.age = 3
+    //   }
+    //   doSome() {
+    //   }
+    // }
+    // class ChildObj extends NewObj {
+    //   constructor() {
+        
+    //     super()
+    //     console.log(super.doSome)
+    //   }
+    //   doSomea() {
+    //   }
+    // }
+    // var newPerson = new ChildObj()
+    // // Object.setPrototypeOf(newPerson, {a:1,b:2})
+    // newPerson.__proto__ = {
+    //   a: 1,
+    //   b: 2
+    // }
+    // console.log(newPerson)
+  </script>
+</body>
+</html>
